@@ -6,8 +6,8 @@ public abstract class Vehiculo {
 
     private String placa;
     private String propietario;
-    private LocalDateTime horaIngreso;
-
+    private LocalDateTime horaIngreso = LocalDateTime.now();
+    
     protected Vehiculo() {
     }
 
