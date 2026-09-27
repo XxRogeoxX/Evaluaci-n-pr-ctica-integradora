@@ -37,3 +37,21 @@ public class VehiculoController {
             return ResponseEntity.status(HttpStatus.CREATED).body(moto);
         }
         return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body("No se pudo ingresar la moto: cupo lleno o placa duplicada");
+    }
+
+    @GetMapping
+    public ArrayList<Vehiculo> listarVehiculos() {
+        return servicioVehiculos.listarVehiculos();
+    }
+
+    @GetMapping("/{placa}")
+    public ResponseEntity<?> buscarPorPlaca(@PathVariable String placa) {
+        Vehiculo vehiculo = servicioVehiculos.buscarPorPlaca(placa);
+        if (vehiculo == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un vehiculo con placa " + placa);
+        }
+        return ResponseEntity.ok(vehiculo);
+    }
+}
